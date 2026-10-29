@@ -1,5 +1,22 @@
-package homework.h05;
-
-// advanced
-// https://leetcode.com/problems/rotate-image/
-public class T2 {}
+class Solution {
+    // LeetCode Problem: https://leetcode.com/problems/squares-of-a-sorted-array/
+    public int[] sortedSquares(int[] nums) {
+        int n = nums.length;
+        int[] result = new int[n];
+        int left = 0;
+        int right = n - 1;
+        
+        // Заповнюємо новий масив з кінця, порівнюючи модулі крайніх елементів
+        for (int i = n - 1; i >= 0; i--) {
+            if (Math.abs(nums[left]) > Math.abs(nums[right])) {
+                result[i] = nums[left] * nums[left];
+                left++;
+            } else {
+                result[i] = nums[right] * nums[right];
+                right--;
+            }
+        }
+        
+        return result;
+    }
+}
