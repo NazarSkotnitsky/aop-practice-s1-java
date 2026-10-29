@@ -1,5 +1,18 @@
-package homework.h06;
+import java.util.Arrays;
 
-// base
-// https://leetcode.com/problems/reverse-words-in-a-string-iii/
-public class T1 {}
+class Solution {
+    // LeetCode Problem: https://leetcode.com/problems/valid-anagram/
+    public boolean isAnagram(String s, String t) {
+        if (s.length() != t.length()) {
+            return false;
+        }
+        
+        char[] sArray = s.toCharArray();
+        char[] tArray = t.toCharArray();
+        
+        Arrays.sort(sArray);
+        Arrays.sort(tArray);
+        
+        return Arrays.equals(sArray, tArray);
+    }
+}
