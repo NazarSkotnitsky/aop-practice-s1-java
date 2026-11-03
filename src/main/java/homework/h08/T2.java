@@ -3,7 +3,7 @@ import java.util.Collections;
 
 class Solution {
     public int countPairs(List<Integer> nums, int target) {
-        // Сортируем список для эффективного подсчета пар (Two Pointers)
+        // Сортуємо список для ефективного підрахунку пар (Two Pointers)
         Collections.sort(nums);
         int count = 0;
         int left = 0;
@@ -11,8 +11,8 @@ class Solution {
         
         while (left < right) {
             if (nums.get(left) + nums.get(right) < target) {
-                // Если сумма меньше target, то все элементы от left до right 
-                // в паре с nums.get(left) тоже будут давать сумму меньше target
+                // Якщо сума менша за target, то всі елементи від left до right 
+                // у парі з nums.get(left) теж даватимуть суму меншу за target
                 count += (right - left);
                 left++;
             } else {
