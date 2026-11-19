@@ -1,0 +1,38 @@
+name: Auto Format Java
+
+on:
+  push:
+    branches: [ "master" ]
+
+permissions:
+  contents: write
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: master
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Format Java code with Spotless
+        run: |
+          mvn com.diffplug.spotless:spotless-maven-plugin:apply \
+            -Dspotless.java.googleJavaFormat=true
+
+      - name: Commit formatted files if changed
+        run: |
+          if [[ -n $(git status --porcelain) ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -m "style: auto-format Java code"
+            git push
+          fi
