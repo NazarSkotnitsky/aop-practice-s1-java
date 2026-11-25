@@ -1,34 +1,48 @@
-https://leetcode.com/problems/implement-queue-using-stacks/
+// https://leetcode.com/problems/implement-queue-using-stacks/
 import java.util.ArrayDeque;
+import java.util.Deque;
 
 class MyQueue {
-    private ArrayDeque<Integer> inputStack;
-    private ArrayDeque<Integer> outputStack;
+    private Deque<Integer> inStack;
+    private Deque<Integer> outStack;
 
     public MyQueue() {
-        inputStack = new ArrayDeque<>();
-        outputStack = new ArrayDeque<>();
+        inStack = new ArrayDeque<>();
+        outStack = new ArrayDeque<>();
     }
-    
+
     public void push(int x) {
-        inputStack.push(x);
+        inStack.push(x);
     }
-    
+
     public int pop() {
-        peek();
-        return outputStack.pop();
+        shiftStacks();
+        return outStack.pop();
     }
-    
+
     public int peek() {
-        if (outputStack.isEmpty()) {
-            while (!inputStack.isEmpty()) {
-                outputStack.push(inputStack.pop());
+        shiftStacks();
+        return outStack.peek();
+    }
+
+    public boolean empty() {
+        return inStack.isEmpty() && outStack.isEmpty();
+    }
+
+    private void shiftStacks() {
+        if (outStack.isEmpty()) {
+            while (!inStack.isEmpty()) {
+                outStack.push(inStack.pop());
             }
         }
-        return outputStack.peek();
     }
-    
-    public boolean empty() {
-        return inputStack.isEmpty() && outputStack.isEmpty();
+
+    public static void main(String[] args) {
+        MyQueue myQueue = new MyQueue();
+        myQueue.push(1);
+        myQueue.push(2);
+        System.out.println(myQueue.peek());
+        System.out.println(myQueue.pop());
+        System.out.println(myQueue.empty());
     }
 }
