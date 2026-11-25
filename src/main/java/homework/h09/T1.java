@@ -1,18 +1,21 @@
-https://leetcode.com/problems/number-of-good-pairs/
+// https://leetcode.com/problems/number-of-good-pairs/
 class Solution {
     public int numIdenticalPairs(int[] nums) {
-        int goodPairs = 0;
-        
-        // Перебираємо всі можливі пари (i, j)
-        for (int i = 0; i < nums.length; i++) {
-            for (int j = i + 1; j < nums.length; j++) {
-                // Якщо елементи рівні та індекс i менший за j
-                if (nums[i] == nums[j]) {
-                    goodPairs++;
-                }
-            }
+        int[] count = new int[101];
+        int pairs = 0;
+
+        for (int num : nums) {
+            pairs += count[num];
+            count[num]++;
         }
-        
-        return goodPairs;
+
+        return pairs;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        System.out.println(solution.numIdenticalPairs(new int[]{1, 2, 3, 1, 1, 3}));
+        System.out.println(solution.numIdenticalPairs(new int[]{1, 1, 1, 1}));
+        System.out.println(solution.numIdenticalPairs(new int[]{1, 2, 3}));
     }
 }
