@@ -1,27 +1,24 @@
-https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/
-import java.util.ArrayDeque;
-
+// https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/
 class Solution {
     public String removeDuplicates(String s) {
-        // Використовуємо стек для збереження символів
-        ArrayDeque<Character> stack = new ArrayDeque<>();
-        
+        StringBuilder sb = new StringBuilder();
+
         for (int i = 0; i < s.length(); i++) {
-            char currentChar = s.charAt(i);
-            // Якщо стек не порожній і верхній елемент дорівнює поточному — видаляємо його (ефект дублікатів)
-            if (!stack.isEmpty() && stack.peek() == currentChar) {
-                stack.pop();
+            char c = s.charAt(i);
+            int len = sb.length();
+            if (len > 0 && sb.charAt(len - 1) == c) {
+                sb.deleteCharAt(len - 1);
             } else {
-                stack.push(currentChar);
+                sb.append(c);
             }
         }
-        
-        // Збираємо результат із залишків у стеку
-        StringBuilder sb = new StringBuilder();
-        while (!stack.isEmpty()) {
-            sb.append(stack.pollLast()); // Додаємо з кінця для збереження порядку
-        }
-        
+
         return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        System.out.println(solution.removeDuplicates("abbaca"));
+        System.out.println(solution.removeDuplicates("azxxzy"));
     }
 }
