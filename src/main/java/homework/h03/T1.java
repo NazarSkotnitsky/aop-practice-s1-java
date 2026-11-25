@@ -1,3 +1,4 @@
+https://leetcode.com/problems/average-salary-excluding-the-minimum-and-maximum-salary/description/
 class Solution {
     public double average(int[] salary) {
         int min = Integer.MAX_VALUE;
