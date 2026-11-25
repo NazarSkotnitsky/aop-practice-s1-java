@@ -1,9 +1,13 @@
-package homework.h02;
-
 // https://leetcode.com/problems/a-number-after-a-double-reversal/
-public class T2 {
+class Solution {
     public boolean isSameAfterReversals(int num) {
-        if (num == 0) return true;
-        return num % 10 != 0;
+        return num == 0 || num % 10 != 0;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        System.out.println(solution.isSameAfterReversals(526));
+        System.out.println(solution.isSameAfterReversals(1800));
+        System.out.println(solution.isSameAfterReversals(0));
     }
 }
