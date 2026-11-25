@@ -1,3 +1,4 @@
+https://leetcode.com/problems/hamming-distance/description/
 public class Solution {
     public int hammingDistance(int x, int y) {
         int xor = x ^ y;
