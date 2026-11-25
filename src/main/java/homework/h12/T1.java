@@ -1,18 +1,31 @@
-https://leetcode.com/problems/height-checker/
-import java.util.Arrays;
-
+// https://leetcode.com/problems/height-checker/
 class Solution {
     public int heightChecker(int[] heights) {
-        int[] expected = heights.clone();
-        Arrays.sort(expected);
-        int count = 0;
-        
-        for (int i = 0; i < heights.length; i++) {
-            if (heights[i] != expected[i]) {
-                count++;
-            }
+        int[] count = new int[101];
+        for (int h : heights) {
+            count[h]++;
         }
-        
-        return count;
+
+        int mismatches = 0;
+        int currentHeight = 1;
+
+        for (int h : heights) {
+            while (count[currentHeight] == 0) {
+                currentHeight++;
+            }
+            if (h != currentHeight) {
+                mismatches++;
+            }
+            count[currentHeight]--;
+        }
+
+        return mismatches;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        System.out.println(solution.heightChecker(new int[]{1, 1, 4, 2, 1, 3}));
+        System.out.println(solution.heightChecker(new int[]{5, 1, 2, 3, 4}));
+        System.out.println(solution.heightChecker(new int[]{1, 2, 3, 4, 5}));
     }
 }
