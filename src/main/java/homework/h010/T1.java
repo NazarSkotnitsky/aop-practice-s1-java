@@ -1,3 +1,4 @@
+https://leetcode.com/problems/find-the-k-th-character-in-string-game-i/submissions/2203078948/
 class Solution {
     public char kthCharacter(int k) {
         StringBuilder word = new StringBuilder("a");
